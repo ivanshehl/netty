@@ -27,6 +27,12 @@ final class DefaultSelectStrategy implements SelectStrategy {
 
     @Override
     public int calculateStrategy(IntSupplier selectSupplier, boolean hasTasks) throws Exception {
+    	/**
+    	 * IntSupplier目前有3种实现分别是epoll,nio和KQueueEventLoop,先了解nio
+    	 * nio在NioEventLoop初始化
+    	 * epoll在EpollEventLoop
+    	 * kQueue在KQueueEventLoop 这个不明白是什么
+    	 */
         return hasTasks ? selectSupplier.get() : SelectStrategy.SELECT;
     }
 }

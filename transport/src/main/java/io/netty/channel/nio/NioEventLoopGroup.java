@@ -60,6 +60,19 @@ public class NioEventLoopGroup extends MultithreadEventLoopGroup {
     }
 
     public NioEventLoopGroup(int nThreads, Executor executor) {
+    	/**
+    	 * SelectorProvider.provider()提供3种策略
+    	 * 1.根据java.nio.channels.spi.SelectorProvider指定
+    	 	macosx: KQueueSelectorProvider
+			solaris: DevPollSelectorProvider
+			Linux: EPollSelectorProvider (Linux kernels >= 2.6)或 PollSelectorProvider
+			windows: WindowsSelectorProvider
+			如 -Djava.nio.channels.spi.SelectorProvider=sun.nio.ch.EPollSelectorProvider
+			来源https://colobu.com/2014/09/12/java-nio-epoll/
+		   2.根据SelectorProvider服务查找取第一个,应该是根据不同操作系统的jdk读取的
+		   3.以上条件不满足则默认采用sun.nio.ch.DefaultSelectorProvider
+    	 * 
+    	 */
         this(nThreads, executor, SelectorProvider.provider());
     }
 

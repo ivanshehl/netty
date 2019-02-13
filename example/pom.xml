@@ -156,26 +156,30 @@
 			<groupId>com.sun.activation</groupId>
 			<artifactId>javax.activation</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
 			<!-- run-example.sh invokes this plugin to launch an example. -->
 			<plugin>
-				<groupId>kr.motd.maven</groupId>
+				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
-				<configuration>
-					<executable>${java.home}/bin/java</executable>
-					<commandlineArgs>
-						${argLine.common}
-						${argLine.alpnAgent}
-						-classpath %classpath
-						${argLine.leak}
-						${argLine.coverage}
-						${argLine.example}
-						${exampleClass}
-					</commandlineArgs>
-				</configuration>
+				<version>1.2.1</version>
+				<executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>com.ivan.tpp.chapter01.client.EchoClient</mainClass>
+                </configuration>
 			</plugin>
 		</plugins>
 	</build>
