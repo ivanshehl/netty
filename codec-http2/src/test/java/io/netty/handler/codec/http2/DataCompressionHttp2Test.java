@@ -90,27 +90,27 @@ public class DataCompressionHttp2Test {
 
     @Before
     public void setup() throws InterruptedException, Http2Exception {
-        MockitoAnnotations.initMocks(this);
-        doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation) throws Throwable {
-                if (invocation.getArgument(4)) {
-                    serverConnection.stream((Integer) invocation.getArgument(1)).close();
-                }
-                return null;
-            }
-        }).when(serverListener).onHeadersRead(any(ChannelHandlerContext.class), anyInt(), any(Http2Headers.class),
-                anyInt(), anyBoolean());
-        doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation) throws Throwable {
-                if (invocation.getArgument(7)) {
-                    serverConnection.stream((Integer) invocation.getArgument(1)).close();
-                }
-                return null;
-            }
-        }).when(serverListener).onHeadersRead(any(ChannelHandlerContext.class), anyInt(), any(Http2Headers.class),
-                anyInt(), anyShort(), anyBoolean(), anyInt(), anyBoolean());
+//        MockitoAnnotations.initMocks(this);
+//        doAnswer(new Answer<Void>() {
+//            @Override
+//            public Void answer(InvocationOnMock invocation) throws Throwable {
+//                if (invocation.getArgument(4)) {
+//                    serverConnection.stream((Integer) invocation.getArgument(1)).close();
+//                }
+//                return null;
+//            }
+//        }).when(serverListener).onHeadersRead(any(ChannelHandlerContext.class), anyInt(), any(Http2Headers.class),
+//                anyInt(), anyBoolean());
+//        doAnswer(new Answer<Void>() {
+//            @Override
+//            public Void answer(InvocationOnMock invocation) throws Throwable {
+//                if (invocation.getArgument(7)) {
+//                    serverConnection.stream((Integer) invocation.getArgument(1)).close();
+//                }
+//                return null;
+//            }
+//        }).when(serverListener).onHeadersRead(any(ChannelHandlerContext.class), anyInt(), any(Http2Headers.class),
+//                anyInt(), anyShort(), anyBoolean(), anyInt(), anyBoolean());
     }
 
     @After
@@ -289,9 +289,9 @@ public class DataCompressionHttp2Test {
 
                 buf.readBytes(serverOut, buf.readableBytes());
 
-                if (in.getArgument(4)) {
-                    serverConnection.stream((Integer) in.getArgument(1)).close();
-                }
+//                if (in.getArgument(4)) {
+//                    serverConnection.stream((Integer) in.getArgument(1)).close();
+//                }
                 return processedBytes;
             }
         }).when(serverListener).onDataRead(any(ChannelHandlerContext.class), anyInt(),

@@ -217,7 +217,7 @@
 
   <build>
     <plugins>
-      <plugin>
+      <!-- <plugin>
         <groupId>org.ops4j.pax.exam</groupId>
         <artifactId>maven-paxexam-plugin</artifactId>
         <executions>
@@ -228,7 +228,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin> -->
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>

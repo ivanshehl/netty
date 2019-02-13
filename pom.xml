@@ -248,8 +248,8 @@
   </profiles>
 
   <properties>
-    <maven.compiler.source>1.6</maven.compiler.source>
-    <maven.compiler.target>1.6</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <netty.dev.tools.directory>${project.build.directory}/dev-tools</netty.dev.tools.directory>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -670,7 +670,7 @@
     </extensions>
 
     <plugins>
-      <plugin>
+      <!-- <plugin>
         <artifactId>maven-enforcer-plugin</artifactId>
         <version>${enforcer.plugin.version}</version>
         <executions>
@@ -682,8 +682,8 @@
             <configuration>
               <rules>
                 <requireJavaVersion>
-                  <!-- Enforce JDK 1.8+ for compilation. -->
-                  <!-- This is needed because of java.util.zip.Deflater and NIO UDP multicast. -->
+                  Enforce JDK 1.8+ for compilation.
+                  This is needed because of java.util.zip.Deflater and NIO UDP multicast.
                   <version>[1.8.0,)</version>
                 </requireJavaVersion>
                 <requireMavenVersion>
@@ -700,7 +700,7 @@
             </configuration>
           </execution>
         </executions>
-      </plugin>
+      </plugin> -->
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.0</version>
@@ -856,7 +856,7 @@
           </dependency>
         </dependencies>
       </plugin>
-      <plugin>
+      <!-- <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>xml-maven-plugin</artifactId>
         <version>1.0.1</version>
@@ -880,7 +880,7 @@
           </formatFileSets>
           <useDefaultFormatFileSet>false</useDefaultFormatFileSet>
         </configuration>
-      </plugin>
+      </plugin> -->
       <!-- Download the npn-boot.jar in advance to add it to the boot classpath. -->
       <plugin>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -956,7 +956,7 @@
         </executions>
       </plugin>
 
-      <plugin>
+      <!-- <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
         <version>1.10</version>
@@ -968,7 +968,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin> -->
 
       <plugin>
         <artifactId>maven-source-plugin</artifactId>
@@ -1155,16 +1155,16 @@
           </dependency>
         </dependencies>
       </plugin>
-      <plugin>
+      <!-- <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-remote-resources-plugin</artifactId>
         <version>1.5</version>
-      </plugin>
-      <plugin>
+      </plugin> -->
+      <!-- <plugin>
         <groupId>de.thetaphi</groupId>
         <artifactId>forbiddenapis</artifactId>
         <version>2.2</version>
-      </plugin>
+      </plugin> -->
     </plugins>
 
     <pluginManagement>
@@ -1243,11 +1243,11 @@
             </dependency>
           </dependencies>
         </plugin>
-        <plugin>
+        <!-- <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>build-helper-maven-plugin</artifactId>
           <version>1.10</version>
-        </plugin>
+        </plugin> -->
         <plugin>
           <groupId>org.fusesource.hawtjni</groupId>
           <artifactId>maven-hawtjni-plugin</artifactId>
