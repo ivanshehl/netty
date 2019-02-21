@@ -25,19 +25,25 @@ import java.util.concurrent.TimeUnit;
  * The {@link EventExecutorGroup} is responsible for providing the {@link EventExecutor}'s to use
  * via its {@link #next()} method. Besides this, it is also responsible for handling their
  * life-cycle and allows shutting them down in a global fashion.
- *
+ * 事件执行器组拥有调度执行器和迭代器功能,本身提供关闭线程池功能,如优雅停机,
+ * 继承以下功能(由根到节点)
+ * 1.普通线程执行器
+ * 2.回调执行器,关闭线程池
+ * 3.调度执行器
+ * 4.添加优雅关闭线程池等方法
  */
 public interface EventExecutorGroup extends ScheduledExecutorService, Iterable<EventExecutor> {
 
     /**
      * Returns {@code true} if and only if all {@link EventExecutor}s managed by this {@link EventExecutorGroup}
      * are being {@linkplain #shutdownGracefully() shut down gracefully} or was {@linkplain #isShutdown() shut down}.
+     * true表示优雅关闭线程池或者已经关闭线程池
      */
     boolean isShuttingDown();
 
     /**
      * Shortcut method for {@link #shutdownGracefully(long, long, TimeUnit)} with sensible default values.
-     *
+     * 新增优雅关闭线程池并返回一个Future  默认优雅停机15秒区间内超过2秒没有任务启动优雅停机
      * @return the {@link #terminationFuture()}
      */
     Future<?> shutdownGracefully();
@@ -49,10 +55,10 @@ public interface EventExecutorGroup extends ScheduledExecutorService, Iterable<E
      * (usually a couple seconds) before it shuts itself down.  If a task is submitted during the quiet period,
      * it is guaranteed to be accepted and the quiet period will start over.
      *
-     * @param quietPeriod the quiet period as described in the documentation
+     * @param quietPeriod the quiet period as described in the documentation  观察期时间内是否有任务  有可能在timeout时间到来之前关闭
      * @param timeout     the maximum amount of time to wait until the executor is {@linkplain #shutdown()}
-     *                    regardless if a task was submitted during the quiet period
-     * @param unit        the unit of {@code quietPeriod} and {@code timeout}
+     *                    regardless if a task was submitted during the quiet period  最晚优雅关闭时间
+     * @param unit        the unit of {@code quietPeriod} and {@code timeout} quietPeriod和timeout单位一致
      *
      * @return the {@link #terminationFuture()}
      */

@@ -21,6 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Default implementation which uses simple round-robin to choose next {@link EventExecutor}.
+ * 默认时间选择执行器工厂用来生产选择执行器,该工厂生产2种:2的次方和非2的次方选择器  对于2的次方做了一个优化
  */
 @UnstableApi
 public final class DefaultEventExecutorChooserFactory implements EventExecutorChooserFactory {

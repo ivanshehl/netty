@@ -28,18 +28,20 @@ public interface Future<V> extends java.util.concurrent.Future<V> {
     /**
      * Returns {@code true} if and only if the I/O operation was completed
      * successfully.
+     * 异步操作完成切正常终止
      */
     boolean isSuccess();
 
     /**
      * returns {@code true} if and only if the operation can be cancelled via {@link #cancel(boolean)}.
+     * 异步操作是否可以取消
      */
     boolean isCancellable();
 
     /**
      * Returns the cause of the failed I/O operation if the I/O operation has
      * failed.
-     *
+     *异步操作失败原因
      * @return the cause of the failure.
      *         {@code null} if succeeded or this future is not
      *         completed yet.
@@ -51,6 +53,7 @@ public interface Future<V> extends java.util.concurrent.Future<V> {
      * specified listener is notified when this future is
      * {@linkplain #isDone() done}.  If this future is already
      * completed, the specified listener is notified immediately.
+     * 添加一个监听者，异步操作完成时回调，类比javascript的回调函数
      */
     Future<V> addListener(GenericFutureListener<? extends Future<? super V>> listener);
 
@@ -59,6 +62,7 @@ public interface Future<V> extends java.util.concurrent.Future<V> {
      * specified listeners are notified when this future is
      * {@linkplain #isDone() done}.  If this future is already
      * completed, the specified listeners are notified immediately.
+     * 添加一个监听者，异步操作完成时回调，类比javascript的回调函数
      */
     Future<V> addListeners(GenericFutureListener<? extends Future<? super V>>... listeners);
 
@@ -83,6 +87,7 @@ public interface Future<V> extends java.util.concurrent.Future<V> {
     /**
      * Waits for this future until it is done, and rethrows the cause of the failure if this future
      * failed.
+     * 阻塞直到异步操作完成,但失败抛异常InterruptedException
      */
     Future<V> sync() throws InterruptedException;
 
@@ -94,7 +99,7 @@ public interface Future<V> extends java.util.concurrent.Future<V> {
 
     /**
      * Waits for this future to be completed.
-     *
+     *阻塞直到异步操作完成
      * @throws InterruptedException
      *         if the current thread was interrupted
      */

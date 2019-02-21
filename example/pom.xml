@@ -161,6 +161,11 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.6</version>
 		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.56</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -171,15 +176,15 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.2.1</version>
 				<executions>
-                    <execution>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <mainClass>com.ivan.tpp.chapter01.client.EchoClient</mainClass>
-                </configuration>
+					<execution>
+						<goals>
+							<goal>java</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<mainClass>com.ivan.tpp.chapter01.client.EchoClient</mainClass>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

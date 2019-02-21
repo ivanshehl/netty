@@ -14,6 +14,8 @@ import java.io.File;
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
 
+import com.ivan.tpp.utils.ThreadPoolUtils;
+
 /**
  * Listing 2.2 EchoServer class
  *
@@ -41,10 +43,13 @@ public class EchoServer {
     		file.createNewFile();
     	}
 		final EchoServerHandler serverHandler = new EchoServerHandler(file);
-		EventLoopGroup group = new NioEventLoopGroup();
+		
+		EventLoopGroup boss = new NioEventLoopGroup(2, ThreadPoolUtils.newFixedThreadArrayPool(2, 5, 0, 1000));
+		
+		EventLoopGroup work = new NioEventLoopGroup(5, ThreadPoolUtils.newFixedThreadArrayPool(5, 8, 1000, 1000));
 		try {
 			ServerBootstrap b = new ServerBootstrap();
-			b.group(group).channel(NioServerSocketChannel.class)
+			b.group(boss,work).channel(NioServerSocketChannel.class)
 					.localAddress(new InetSocketAddress(port))
 					.childOption(ChannelOption.SO_RCVBUF, 1024*10)
 					.childOption(ChannelOption.SO_SNDBUF, 1024*10)
@@ -63,7 +68,8 @@ public class EchoServer {
 					+ f.channel().localAddress());
 			f.channel().closeFuture().sync();
 		} finally {
-			group.shutdownGracefully().sync();
+			boss.shutdownGracefully().sync();
+			work.shutdownGracefully().sync();
 		}
 	}
 }
